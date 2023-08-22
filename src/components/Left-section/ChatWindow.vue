@@ -2,6 +2,7 @@
   <div class="flex h-screen">
     <!-- Add this line -->
     <div class="hidden md:flexy">ddddd</div>
+    <!-- <h1>Left side</h1> -->
     <!-- Sidebar -->
     <section class="md:w-1/4 bg-[#F7F7F7] overflow-y-auto">
       <!-- RHS Content -->
@@ -26,6 +27,7 @@
 
     <!-- Note Edit area -->
     <div class="hidden md:flex-1">
+      <h1>Right side</h1>
       <!-- Body -->
     </div>
     <SearchButton />

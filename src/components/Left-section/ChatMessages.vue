@@ -2,6 +2,7 @@
   <div>
     <div v-for="message in messages" :key="message.id" class="p-4">
       {{ message.content }}
+      <h1>Hello Shazzar</h1>
     </div>
   </div>
 </template>

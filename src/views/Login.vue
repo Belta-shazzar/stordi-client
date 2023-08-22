@@ -55,9 +55,32 @@
   import { ref } from "vue";
   import AuthLayout from "../components/layout/AuthLayout.vue";
   import AuthButton from "../components/buttons/AuthButton.vue";
-
+  
+  const fullName = ref("");
   const email = ref("");
   const password = ref("");
+  const emptyFieldErr = ref(false);
+  const passErr = ref(false);
+  
+  const handleSubmit = () => {
+    if (fullName.value.trim().length < 3 || email.value.trim().length < 3) {
+      emptyFieldErr.value = true
+      return;
+    }
+  
+    if (password.value.trim().length < 7) {
+      passErr.value = true
+      return;
+    }
+  
+    const reqBody = {
+      fullName: fullName.value,
+      email: email.value,
+      password: password.value,
+    }
+  
+    console.log(reqBody);
+  }
   </script>
   
   <style lang="scss" scoped></style>
