@@ -19,11 +19,15 @@
       </div>
       <NoteList />
     </div>
-    <!-- <h1>Shazzar</h1> -->
+    
+    <div class="w-full ml-5">
+      <NoteContent />
+    </div>
   </div>
 </template>
 
 <script setup>
+import NoteContent from "../components/layout/NoteContent.vue";
 import NoteList from "../components/layout/NoteList.vue";
 import AuthNavbar from "../components/navbar/AuthNavbar.vue";
 </script>

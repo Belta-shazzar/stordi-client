@@ -13,10 +13,10 @@
       <div
         v-for="index in 10"
         :key="index"
-        class="bg-white p-5 m-3 hover:bg-[#e5e5e5f5] border-gray-300 rounded-md"
+        class="bg-white p-5 m-3 hover:bg-[#e5e5e5f5] border-gray-300 rounded-xl"
       >
         <div class="">
-          <h1 class="text-lg font-semibold capitalize">Note Content {{ index }}</h1>
+          <h1 class="text-lg font-semibold capitalize mb-1">Note Content {{ index }}</h1>
           <p class="truncate-text text-sm text-secondary">
             Some little content, Some little content Some little content Some little content Some
             little content fknhubfrjnildksndopfjeivna eanldfvbe dvbewljepf efo
