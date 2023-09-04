@@ -21,7 +21,7 @@
           class="category flex justify-between hover:bg-hover px-8 py-4"
         >
           <p>General</p>
-          <p class="cat-num">13</p>
+          <p class="cat-num">27</p>
         </div>
       </div>
     </div>
