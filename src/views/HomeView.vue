@@ -7,12 +7,8 @@
     </h1>
     <p class="font-medium">We help you make studying seamless</p>
     <div class="flex gap-3 mt-5">
-      <RouterLink class="hover:underline pb-2" to="/sign-up"
-        >sign up</RouterLink
-      >
-      <RouterLink class="hover:underline pb-2" to="/sign-in"
-        >sign in</RouterLink
-      >
+      <RouterLink class="hover:underline pb-2" to="/sign-up">sign up</RouterLink>
+      <RouterLink class="hover:underline pb-2" to="/sign-in">sign in</RouterLink>
     </div>
   </div>
 </template>

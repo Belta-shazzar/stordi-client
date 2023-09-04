@@ -8,11 +8,21 @@
       placeholder="Title..."
       class="w-full pt-12 px-4 pb-2 rounded-xl outline-none text-2xl mb-4 text-secondary"
     />
-    <textarea name="" id="" cols="30" rows="10" class="rounded-xl w-full h-full outline-none p-4 text-lg font-normal text-secondary"></textarea>
+    <!-- <textarea
+      name=""
+      id=""
+      cols="30"
+      rows="10"
+      placeholder="take note..."
+      class="rounded-xl w-full h-full outline-none p-4 text-lg font-normal text-secondary"
+    ></textarea> -->
+    <Quill />
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import Quill from './Quill.vue';
+</script>
 
 <style scoped>
 textarea {

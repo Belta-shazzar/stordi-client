@@ -13,7 +13,7 @@
       <div
         v-for="index in 10"
         :key="index"
-        class="bg-white p-5 m-3 hover:bg-[#e5e5e5f5] border-gray-300 rounded-xl"
+        class="bg-white p-5 m-3 border-l-4 rounded-s-none hover:bg-[#e5e5e5f5] rounded-xl"
       >
         <div class="">
           <h1 class="text-lg font-semibold capitalize mb-1">Note Content {{ index }}</h1>
