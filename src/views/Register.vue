@@ -67,7 +67,7 @@ import AuthButton from "../components/buttons/AuthButton.vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
 
-const router = useRouter()
+const router = useRouter();
 const fullName = ref("");
 const email = ref("");
 const password = ref("");
@@ -75,6 +75,7 @@ const emptyFieldErr = ref(false);
 const passErr = ref(false);
 
 const handleSubmit = async () => {
+  console.log("submitted");
   if (fullName.value.trim().length < 3 || email.value.trim().length < 3) {
     emptyFieldErr.value = true;
     return;
@@ -90,20 +91,23 @@ const handleSubmit = async () => {
     email: email.value,
     password: password.value,
   };
+  console.log();
+  console.log(reqBody);
+  console.log();
 
-  axios
-    // .post(`${process.env.BASEURL}/api/v1/auth/sign-up`, { ...reqBody })
-    .post("http://localhost:7000/api/v1/auth/sign-up", { ...reqBody })
-    .then(function (response) {
-      if (response.data.success) {
-        router.push({ name: 'notes' });
-      } else {
-      }
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  const response = await axios.post("/auth/sign-up", reqBody);
+
+  console.log(response);
+  // .then(function (response) {
+  //   // if (response.data.success) {
+  //   //   router.push({ name: 'notes' });
+  //   // } else {
+  //   // }
+  //   console.log(response);
+  // })
+  // .catch(function (error) {
+  //   console.log(error);
+  // });
 };
 </script>
 

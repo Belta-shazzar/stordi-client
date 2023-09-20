@@ -1,5 +1,5 @@
 <template>
-  <div class="text-secondary">
+  <div class="text-secondary border-r-2">
     <!-- <div class="head bg-red-400 px-12 pt-8"> -->
     <div class="head px-12 pt-8">
       <span class="flex justify-between items-end pb-10">
