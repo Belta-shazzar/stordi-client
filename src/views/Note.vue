@@ -4,7 +4,7 @@
     <div class="flex w-screen h-screen overflow-hidden">
         <Sidebar class="w-[20%] bg-accent text-white" />
         <NoteList class="w-[35%]" />
-        <NoteContent class="w-[45%]" />
+        <NoteContent class="w-[45%]"/>
     </div>
   </div>
 </template>
@@ -17,4 +17,4 @@ import NoteContent from "../components/layout/NoteContent.vue";
 
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

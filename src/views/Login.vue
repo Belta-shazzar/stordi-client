@@ -50,7 +50,7 @@ import AuthButton from "../components/buttons/AuthButton.vue";
 const router = useRouter();
 const email = ref("");
 const password = ref("");
-const store = useStore()
+const store = useStore();
 
 const handleSubmit = async () => {
   console.log("submitted");
@@ -60,14 +60,14 @@ const handleSubmit = async () => {
   };
 
   const response = await axios.post("/auth/sign-in", reqBody);
-  
+
   if (response.data.success) {
     localStorage.setItem("token", response.data.data.token);
     const user = {
       data: response.data.data.user,
-      token: response.data.data.token
-    }
-    store.dispatch('user', user)
+      token: response.data.data.token,
+    };
+    store.dispatch("user", user);
     router.push({ name: "Notes" });
     console.log(response);
   }

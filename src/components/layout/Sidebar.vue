@@ -1,11 +1,23 @@
 <template>
   <div class="">
-    <div class="deet flex justify-between items-center mb-20 px-8 pt-8">
-      <span class="flex items-center">
-        <h3 class="mr-2 bg-hover p-2 rounded-full font-semibold">DO</h3>
-        <p>Daniel Oguejiofor</p>
-      </span>
-      <i class="fa-solid fa-ellipsis-vertical cursor-pointer p-3"></i>
+    <div class="px-8 pt-8 mb-10">
+      <div class="deet flex justify-between items-center mb-5">
+        <span class="flex items-center">
+          <h3 class="mr-2 bg-hover p-2 rounded-full font-semibold">DO</h3>
+          <p>Daniel Oguejiofor</p>
+        </span>
+        <i @click="sidebarToggle" class="fa-solid fa-ellipsis-vertical cursor-pointer p-3"></i>
+      </div>
+      <div class="flex w-100 justify-center">
+        <RouterLink
+          to="/"
+          v-show="showLogout"
+          @click="logout"
+          class="bg-red-400 hover:bg-red-300 px-8 py-2 rounded-md"
+        >
+          Log out
+        </RouterLink>
+      </div>
     </div>
 
     <div class="">
@@ -31,14 +43,32 @@
       <i class="fa-regular fa-trash-can text-xl cursor-pointer p-3"></i>
     </div>
 
-    <div class="flex gap-x-1 items-center justify-center text-hover tracking-[.1em]">
+    <RouterLink to="/" class="flex gap-x-1 items-center justify-center text-hover tracking-[.1em]">
       <h1 className="font-extrabold text-lg">Stord</h1>
       <i class="fa-solid fa-pen"></i>
-    </div>
+    </RouterLink>
   </div>
 </template>
 
 <script setup>
+import { ref } from "vue";
+import { useStore } from "vuex";
+
+const showLogout = ref(false);
+const store = useStore();
+
+const sidebarToggle = () => {
+  showLogout.value = !showLogout.value;
+};
+
+const logout = () => {
+  localStorage.removeItem("token");
+  const user = {
+    data: {},
+    token: null,
+  };
+  store.dispatch("user", user);
+};
 </script>
 
 <style scoped>
