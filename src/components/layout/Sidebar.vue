@@ -3,8 +3,10 @@
     <div class="px-8 pt-8 mb-10">
       <div class="deet flex justify-between items-center mb-5">
         <span class="flex items-center">
-          <h3 class="mr-2 bg-hover p-2 rounded-full font-semibold">DO</h3>
-          <p>Daniel Oguejiofor</p>
+          <h3 class="mr-2 bg-hover p-2 rounded-full font-semibold">
+            {{ initials }}
+          </h3>
+          <p class="font-semibold">{{ fullName }}</p>
         </span>
         <i @click="sidebarToggle" class="fa-solid fa-ellipsis-vertical cursor-pointer p-3"></i>
       </div>
@@ -28,13 +30,16 @@
 
       <div class="categories overflow-auto h-96 border-y-2 border-[#9fdad7] mb-10">
         <div
-          v-for="index in 18"
-          :key="index"
+          v-for="category in categories"
+          :key="category._id"
           class="category flex justify-between hover:bg-hover px-8 py-4"
         >
-          <p>General</p>
-          <p class="cat-num">27</p>
+          <p>{{ category.name }}</p>
+          <p class="cat-num">{{ category.size }}</p>
         </div>
+        <!-- <div v-else>
+          <p class="font-semibold">Add a category</p>
+        </div> -->
       </div>
     </div>
 
@@ -51,23 +56,40 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useStore } from "vuex";
+import axios from "axios";
+
+const store = useStore();
+
+onMounted(async () => {
+  const response = await axios.get("/category")
+
+  await store.dispatch("categories", response.data.data.categories);
+  console.log('on load categories: ', response.data.data.categories)
+})
+
+const user = store.getters.user.data;
+const categories = computed(() => store.getters.categories);
+console.log('categories: ', categories)
 
 const showLogout = ref(false);
-const store = useStore();
+
+const initials = computed(() => {
+  return user.firstname.charAt(0) + user.lastname.charAt(0);
+});
+
+const fullName = computed(() => {
+  return `${user.firstname} ${user.lastname}`;
+});
 
 const sidebarToggle = () => {
   showLogout.value = !showLogout.value;
 };
 
+
 const logout = () => {
-  localStorage.removeItem("token");
-  const user = {
-    data: {},
-    token: null,
-  };
-  store.dispatch("user", user);
+  store.dispatch("removeUser");
 };
 </script>
 
@@ -84,7 +106,7 @@ const logout = () => {
 }
 
 .categories::-webkit-scrollbar-thumb {
-  background-color: #9fdad7; /* Set the color of the thumb */
-  border-radius: 3px; /* Add rounded corners to the thumb */
+  background-color: #9fdad7;
+  border-radius: 3px;
 }
 </style>

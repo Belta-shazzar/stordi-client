@@ -1,6 +1,8 @@
 <template>
   <AuthLayout>
-    <div class="flex justify-center bg-white px-4 py-12 rounded-md md:mx-[400px]">
+    <div
+      class="flex justify-center bg-white w-[90%] lg:w-[40%] px-4 py-12 rounded-md -mt-[200px] md:mx-[400px]"
+    >
       <div class="w-full">
         <form @submit.prevent="handleSubmit">
           <span v-if="emptyFieldErr" class="text-sm mb-1.5 text-error"
@@ -35,12 +37,12 @@
             />
           </div>
 
-          <div className="email flex flex-col mb-4">
+          <div className="password flex flex-col mb-4">
             <label htmlFor="password" className="text-sm font-medium text-[#828FA3] pb-2">
               Password
             </label>
             <input
-              type="password"
+              type="passwordd"
               name="password"
               id="password"
               v-model="password"
@@ -51,7 +53,25 @@
               >password should be more than 7 characters</span
             >
           </div>
+
+          <!-- <div className="confirm_password flex flex-col mb-4">
+            <span v-if="confPassErr" class="text-sm text-error"
+              >confirm password does not match password</span
+            >
+            <label htmlFor="confirm_password" className="text-sm font-medium text-[#828FA3] pb-2">
+              Confirm Password
+            </label>
+            <input
+              type="passwordd"
+              name="confirm_password"
+              id="confirm_password"
+              v-model="confirmPassword"
+              placeholder="************"
+              className="p-2 mb-2 outline-none border border-[#828FA340] rounded text-sm"
+            /> -->
+          <!-- </div> -->
           <AuthButton>Sign Up</AuthButton>
+          <RouterLink to="/sign-in">i have an account</RouterLink>
         </form>
       </div>
 
@@ -61,21 +81,23 @@
 </template>
 
 <script setup>
+import axios from "axios";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import AuthLayout from "../components/layout/AuthLayout.vue";
 import AuthButton from "../components/buttons/AuthButton.vue";
-import { useRouter } from "vue-router";
-import axios from "axios";
+import { handleAuthResponse } from "../utils";
 
 const router = useRouter();
 const fullName = ref("");
 const email = ref("");
 const password = ref("");
+const confirmPassword = ref("");
 const emptyFieldErr = ref(false);
 const passErr = ref(false);
+const confPassErr = ref(false);
 
 const handleSubmit = async () => {
-  console.log("submitted");
   if (fullName.value.trim().length < 3 || email.value.trim().length < 3) {
     emptyFieldErr.value = true;
     return;
@@ -86,28 +108,30 @@ const handleSubmit = async () => {
     return;
   }
 
+  // if (password.value !== confPassErr.value) {
+  //   confPassErr.value = true;
+  //   return;
+  // }
+
   const reqBody = {
     fullname: fullName.value,
     email: email.value,
     password: password.value,
   };
-  console.log();
-  console.log(reqBody);
-  console.log();
 
-  const response = await axios.post("/auth/sign-up", reqBody);
+  try {
+    const response = await axios.post("/auth/sign-up", reqBody);
+    console.log("Submitted");
+    console.log(response);
 
-  console.log(response);
-  // .then(function (response) {
-  //   // if (response.data.success) {
-  //   //   router.push({ name: 'notes' });
-  //   // } else {
-  //   // }
-  //   console.log(response);
-  // })
-  // .catch(function (error) {
-  //   console.log(error);
-  // });
+    const handleResponse = await handleAuthResponse(response);
+
+    if (handleResponse.success) {
+      router.push({ name: "Notes" });
+    } else {
+      // display error modal
+    }
+  } catch (error) {}
 };
 </script>
 

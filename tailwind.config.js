@@ -15,6 +15,7 @@ module.exports = {
     },
     fontFamily: {
       Monts: ['Montserrat, sans-serif'],
+      Mont_Alt: ['Montserrat Alternates']
     },
     container: {
       padding: '2rem',

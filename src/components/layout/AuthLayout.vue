@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <AuthNavbar />
-    <main className="bg-primary w-full h-screen px-4 py-8">
+  <div class="">
+    <!-- <AuthNavbar /> -->
+    <main className="bg-primary flex justify-center items-center w-full h-screen py-8">
         <slot />
     </main>
   </div>
